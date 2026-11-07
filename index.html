@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gridworks — Commercial Structural Engineering & Heavy Infrastructure</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-yellow-400 selection:text-black">
+
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-yellow-400 flex items-center justify-center text-black font-black text-xl">GW</div>
+        <span class="text-xl font-bold tracking-tight">GRIDWORKS<span class="text-yellow-400">/</span></span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-semibold text-zinc-400">
+        <a href="#projects" class="hover:text-yellow-400 transition">Infrastructure</a>
+        <a href="#estimator" class="hover:text-yellow-400 transition">Bid Estimator</a>
+        <a href="#safety" class="hover:text-yellow-400 transition">Safety Records</a>
+        <a href="#capabilities" class="hover:text-yellow-400 transition">Engineering</a>
+      </nav>
+      <a href="#estimator" class="px-5 py-2.5 bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xs uppercase tracking-wider transition">
+        Submit Tender RFQ
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="pt-36 pb-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs font-mono uppercase">
+            <span>●</span> Heavy Civil & Structural EPC General Contractor
+          </div>
+          <h1 class="text-5xl sm:text-6xl font-bold tracking-tight leading-none uppercase">
+            We forge the <span class="text-yellow-400 underline decoration-yellow-400/40 underline-offset-8">physical backbone</span> of modern cities.
+          </h1>
+          <p class="text-zinc-400 text-base max-w-xl leading-relaxed">
+            Delivering mission-critical bridges, deep-water ports, data center campuses, and 60+ story steel structures on accelerated schedules with zero catastrophic incidents.
+          </p>
+
+          <div class="grid grid-cols-3 gap-6 pt-4 border-t border-zinc-800">
+            <div>
+              <div class="text-3xl font-black text-yellow-400 font-mono">$3.4B</div>
+              <div class="text-xs text-zinc-500 uppercase mt-1">Capital Work Delivered</div>
+            </div>
+            <div>
+              <div class="text-3xl font-black text-yellow-400 font-mono">1,820</div>
+              <div class="text-xs text-zinc-500 uppercase mt-1">Safe Days Without LTI</div>
+            </div>
+            <div>
+              <div class="text-3xl font-black text-yellow-400 font-mono">98.4%</div>
+              <div class="text-xs text-zinc-500 uppercase mt-1">On-Budget Delivery</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="border border-zinc-800 bg-zinc-900 p-2 relative shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1000&q=80" alt="Construction Crane" class="w-full h-[480px] object-cover">
+            <div class="absolute bottom-6 left-6 right-6 p-4 bg-zinc-950/90 border border-zinc-800">
+              <span class="text-[10px] font-mono uppercase text-yellow-400">Featured Active Site</span>
+              <p class="text-xs font-bold text-zinc-200 mt-0.5">Metropolitan High-Speed Transit Terminal 4</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Project Cost & Timeline Estimator -->
+  <section id="estimator" class="py-24 bg-zinc-900 border-y border-zinc-800">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center space-y-3 mb-14">
+        <span class="text-xs font-mono uppercase text-yellow-400">Engineering Estimator</span>
+        <h2 class="text-3xl sm:text-4xl font-bold uppercase">Commercial Bid Cost Modeling</h2>
+        <p class="text-xs text-zinc-400">Calculate initial rough order of magnitude (ROM) budgets for structural civil works.</p>
+      </div>
+
+      <div class="p-8 sm:p-10 bg-zinc-950 border border-zinc-800 grid md:grid-cols-2 gap-8 items-center shadow-2xl">
+        <div class="space-y-6">
+          <div>
+            <label class="block text-xs uppercase font-mono text-zinc-400 mb-2">Project Classification</label>
+            <select id="projType" onchange="calcBid()" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-sm text-zinc-200">
+              <option value="commercial">Commercial High-Rise Steel Tower</option>
+              <option value="datacenter">Hyperscale Tier-4 Data Center</option>
+              <option value="industrial">Heavy Manufacturing & Logistics Hub</option>
+              <option value="bridge">Post-Tensioned Cable Highway Bridge</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono uppercase text-zinc-400 mb-2">
+              <span>Gross Floor Area (Sq Ft)</span>
+              <span id="sqftLabel" class="text-yellow-400 font-bold">150,000 sq ft</span>
+            </div>
+            <input type="range" id="sqftSlider" min="20000" max="800000" step="10000" value="150000" oninput="updateSqft(this.value)" class="w-full accent-yellow-400 cursor-pointer">
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase font-mono text-zinc-400 mb-2">LEED / Green Certification Target</label>
+            <select id="leedTarget" onchange="calcBid()" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-sm text-zinc-200">
+              <option value="silver">LEED Silver Standard</option>
+              <option value="gold">LEED Gold Performance</option>
+              <option value="platinum">LEED Platinum Net-Zero</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="p-6 bg-zinc-900 border border-zinc-800 text-center space-y-4">
+          <span class="text-xs font-mono uppercase text-zinc-400">Estimated Project Capital Expenditure</span>
+          <div id="bidTotal" class="text-4xl font-mono font-black text-yellow-400">$48,750,000</div>
+          <div class="text-xs text-zinc-400 space-y-1">
+            <p>Estimated Construction Duration: <span id="durLabel" class="text-zinc-100 font-bold">18 Months</span></p>
+            <p class="text-[11px] text-zinc-500">Includes core & shell, civil foundation, MEP infrastructure</p>
+          </div>
+          <button onclick="alert('RFI logged. Gridworks Chief Estimator will dispatch bid qualification documents.')" class="w-full py-3.5 bg-yellow-400 hover:bg-yellow-300 text-black font-bold text-xs uppercase tracking-wider transition">
+            Request Formal RFP Package
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Showcase -->
+  <section id="projects" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="flex justify-between items-end mb-12">
+      <div>
+        <span class="text-xs font-mono uppercase text-yellow-400">Completed Works</span>
+        <h2 class="text-3xl font-bold uppercase mt-1">Infrastructure Portfolio</h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="border border-zinc-800 bg-zinc-900 group">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Apex Tower" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <div class="p-6 space-y-2">
+          <span class="text-[11px] font-mono text-yellow-400 uppercase">Seattle, WA • 52 Stories</span>
+          <h3 class="text-xl font-bold uppercase">The Apex Spire</h3>
+          <p class="text-xs text-zinc-400">Seismic-isolated skyscraper featuring 40,000 tons of recycled structural steel.</p>
+        </div>
+      </div>
+
+      <div class="border border-zinc-800 bg-zinc-900 group">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80" alt="Suspension Bridge" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <div class="p-6 space-y-2">
+          <span class="text-[11px] font-mono text-yellow-400 uppercase">Vancouver, BC • 2.8 km</span>
+          <h3 class="text-xl font-bold uppercase">Strait Gateway Viaduct</h3>
+          <p class="text-xs text-zinc-400">Cable-stayed coastal causeway engineered for 150-year hurricane resilience.</p>
+        </div>
+      </div>
+
+      <div class="border border-zinc-800 bg-zinc-900 group">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Manufacturing Hub" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <div class="p-6 space-y-2">
+          <span class="text-[11px] font-mono text-yellow-400 uppercase">Austin, TX • 1.2M Sq Ft</span>
+          <h3 class="text-xl font-bold uppercase">Lithium Gigafactory Campus</h3>
+          <p class="text-xs text-zinc-400">Ultra-fast-track industrial EPC completed in record 11 months from groundbreaking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-zinc-800 py-12 text-center text-xs text-zinc-500 uppercase font-mono">
+    <p>© 2026 Gridworks Engineering & Construction Corp. Licensed General Contractor Class A.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    let sqft = 150000;
+
+    function updateSqft(val) {
+      sqft = parseInt(val);
+      document.getElementById('sqftLabel').textContent = sqft.toLocaleString() + ' sq ft';
+      calcBid();
+    }
+
+    function calcBid() {
+      const type = document.getElementById('projType').value;
+      const rates = {
+        commercial: 325,
+        datacenter: 450,
+        industrial: 240,
+        bridge: 580
+      };
+      const durations = {
+        commercial: 18,
+        datacenter: 14,
+        industrial: 11,
+        bridge: 24
+      };
+
+      const rate = rates[type] || 300;
+      const total = sqft * rate;
+      const months = Math.round(durations[type] * Math.pow(sqft / 150000, 0.3));
+
+      document.getElementById('bidTotal').textContent = '$' + total.toLocaleString();
+      document.getElementById('durLabel').textContent = months + ' Months';
+    }
+  </script>
+</body>
+</html>
